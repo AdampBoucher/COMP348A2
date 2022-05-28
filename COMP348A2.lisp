@@ -7,11 +7,10 @@
 ;     ((> from to) '())
 ;     ((< from 1) '())
 ;     ((> to (list-length lst)) '())
-;     ((> from 1) (sub-list (cdr lst) (1- from) (1- to)))
-;     (t (cons (car lst) (sub-list (cdr lst) from (1- to))))
+;     ((> from 1) (sub-list (cdr lst) (- from 1) (- to 1)))
+;     (t (cons (car lst) (sub-list (cdr lst) from (- to 1))))
 ;   )
 ; )
-
 ; (print (sub-list '(1 4 10) 2 3))
 ; (print (sub-list '(1 4 10) 2))
 ; (print (sub-list '(1 7 12) 1 4))
@@ -28,8 +27,8 @@
 ;     ((> from to) '())
 ;     ((< from 1) (sub-list2 lst 1 to))
 ;     ((> to (list-length lst)) (sub-list2 lst from (list-length lst)))
-;     ((> from 1) (sub-list2 (cdr lst) (1- from) (1- to)))
-;     (t (cons (car lst) (sub-list2 (cdr lst) from (1- to))))))
+;     ((> from 1) (sub-list2 (cdr lst) (- from 1) (- to 1)))
+;     (t (cons (car lst) (sub-list2 (cdr lst) from (- to 1))))))
 
 ; (print (sub-list2 '(1 4 10) 2 3))
 ; (print (sub-list2 '(1 4 10) 2))
@@ -44,11 +43,14 @@
 ;   (cond
 ;     ((null to) (sub-list3 lst from (list-length lst)))
 ;     ((null lst) '())
-;     ((> from to) (append (sub-list3 (cdr lst) (1- from) to) (list (car lst))))
+;     ((> from to) (append (sub-list3 (cdr lst) (- from 1) to) (list (car lst))))
 ;     ((< from 1) (sub-list3 lst 1 to))
 ;     ((> to (list-length lst)) (sub-list3 lst from (list-length lst)))
-;     ((> from 1) (sub-list3 (cdr lst) (1- from) (1- to)))
-;     (t (cons (car lst) (sub-list3 (cdr lst) from (1- to))))))
+;     ((> from 1) (sub-list3 (cdr lst) (- from 1) (- to 1)))
+;     (t (cons (car lst) (sub-list3 (cdr lst) from (- to 1))))
+;    )
+;)
+
 ; (print (sub-list3 '(1 4 10) 3 2))
 ; (print (sub-list3 '(1 4 10) 3))
 ; (print (sub-list3 '(1 7 12) 4 0))
@@ -56,9 +58,19 @@
 
 
 
-; ;Question 4
-; (defun flatten-nums-nodup(lst)
-;   )
+;Question 4 TODO: REMOVE DUPLICATES
+;(defun flatten-nums-nodup(lst)
+;    (cond
+;        ((null lst) '())
+;        ((listp(car lst)) (flatten-nums-nodup(append (car lst) (cdr lst))))
+;        ((numberp(car lst))
+;            (cons (car lst) (flatten-nums-nodup(cdr lst))))
+;        (t (flatten-nums-nodup(cdr lst)))
+;    )   
+;)
+
+;(print (flatten-nums-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))))
+
 
 
 
